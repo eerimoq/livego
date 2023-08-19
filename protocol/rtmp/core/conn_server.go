@@ -88,6 +88,7 @@ func NewConnServer(conn *Conn) *ConnServer {
 func (connServer *ConnServer) writeMsg(csid, streamID uint32, args ...interface{}) error {
 	connServer.bytesw.Reset()
 	for _, v := range args {
+        	log.Debugf("rtmp rsp: ", v)
 		if _, err := connServer.encoder.Encode(connServer.bytesw, v, amf.AMF0); err != nil {
 			return err
 		}
@@ -251,7 +252,7 @@ func (connServer *ConnServer) handleCmdMsg(c *ChunkStream) error {
 	if err != nil && err != io.EOF {
 		return err
 	}
-	// log.Debugf("rtmp req: %#v", vs)
+	log.Debugf("rtmp req: %#v", vs)
 	switch vs[0].(type) {
 	case string:
 		switch vs[0].(string) {
