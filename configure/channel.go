@@ -59,14 +59,14 @@ func (r *RoomKeysType) SetKey(channel string) (key string, err error) {
 			}
 		}
 	}
-
 	for {
-		key = uid.RandStringRunes(48)
-		if _, found := r.localCache.Get(key); !found {
+                key = "1234"
+		// key = uid.RandStringRunes(48)
+		//if _, found := r.localCache.Get(key); !found {
 			r.localCache.SetDefault(channel, key)
 			r.localCache.SetDefault(key, channel)
 			break
-		}
+		//}
 	}
 	return
 }
